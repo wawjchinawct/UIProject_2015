@@ -19,7 +19,7 @@
         </Canvas>
         <!-- Note region -->
         <Canvas x:Name="my_pdfViewer" Height="487" Canvas.Top="83" Width="348" Background="#FFF83D3D">
-            <DocumentViewer x:Name="myDocViewer" Height="487" Width="348"/>
+            <DocumentViewer x:Name="myDoc" Height="487" Width="348"/>
         </Canvas>
         <!-- pdf area -->
         <Canvas x:Name="my_thumbnail" Height="83" Width="794" Background="#FF873131"/>

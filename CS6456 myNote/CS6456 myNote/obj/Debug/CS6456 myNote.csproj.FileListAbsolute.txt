@@ -11,3 +11,6 @@ c:\users\chutian\documents\visual studio 2013\Projects\CS6456 myNote\CS6456 myNo
 c:\users\chutian\documents\visual studio 2013\Projects\CS6456 myNote\CS6456 myNote\obj\Debug\CS6456 myNote.exe
 c:\users\chutian\documents\visual studio 2013\Projects\CS6456 myNote\CS6456 myNote\obj\Debug\CS6456 myNote.pdb
 C:\Users\Chutian\documents\visual studio 2013\Projects\CS6456 myNote\CS6456 myNote\obj\Debug\CS6456 myNote.csprojResolveAssemblyReference.cache
+C:\Users\Chutian\Documents\GitHub\UIProject_2015\CS6456 myNote\CS6456 myNote\bin\Debug\CS6456 myNote.exe.config
+C:\Users\Chutian\Documents\GitHub\UIProject_2015\CS6456 myNote\CS6456 myNote\obj\Debug\CS6456 myNote.exe
+C:\Users\Chutian\Documents\GitHub\UIProject_2015\CS6456 myNote\CS6456 myNote\obj\Debug\CS6456 myNote.pdb
