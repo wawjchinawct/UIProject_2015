@@ -201,7 +201,7 @@ namespace CS6456_myNote
 
 
         void my_UIInitial(){
-            myDocViewer.AllowDrop = true;
+
             foreach (UIElement uiEle in my_NoteArea.Children)
             {
                 //WPF's problem: Button.Clicked event can Supress!!!!    Mouse.MouseLeftButtonDown..... events.
