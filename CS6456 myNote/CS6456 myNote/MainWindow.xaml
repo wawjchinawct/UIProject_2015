@@ -1,0 +1,33 @@
+﻿<Window x:Class="CS6456_myNote.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="600" Width="800" ResizeMode="NoResize" KeyDown="Window_KeyDown">
+    <!-- No resize, need implement at last-->
+    <Canvas Margin="0,0,0,0" Background="#FFE2D3D3">
+
+        <Canvas x:Name="my_NoteArea" Height="457" Canvas.Left="353" Canvas.Top="113" Width="441" Background="#FFF59191">
+            <Rectangle x:Name="com_Indicator" Height="100" Canvas.Left="545" Stroke="Black" Canvas.Top="348" Width="100" StrokeDashArray="1 1" StrokeThickness="2" Panel.ZIndex="10">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="White" Opacity="0"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <TextBox x:Name="myTextBox_0" Height="56" Canvas.Left="154" TextWrapping="Wrap" Text="#1 TextBox" Canvas.Top="82" Width="96"/>
+            <TextBox x:Name="myTextBox_1" Height="96" Canvas.Left="93" TextWrapping="Wrap" Text="#1 TextBox" Canvas.Top="181" Width="106"/>
+            <TextBox x:Name="myTextBox_2" Height="66" Canvas.Left="105" TextWrapping="Wrap" Text="TextBox" Canvas.Top="351" Width="59"/>
+            <TextBox x:Name="myTextBox_3" Height="82" Canvas.Left="266" TextWrapping="Wrap" Text="TextBox" Canvas.Top="346" Width="145"/>
+
+        </Canvas>
+        <!-- Note region -->
+        <Canvas x:Name="my_pdfViewer" Height="487" Canvas.Top="83" Width="348" Background="#FFF83D3D">
+            <DocumentViewer x:Name="myDocViewer" Height="487" Width="348"/>
+        </Canvas>
+        <!-- pdf area -->
+        <Canvas x:Name="my_thumbnail" Height="83" Width="794" Background="#FF873131"/>
+        <Canvas x:Name="my_Note_Menu" Height="30" Canvas.Left="353" Canvas.Top="83" Width="441" Background="#FFFFB7B7">
+            <Button Content="Button" Width="65" Height="30" Click="NewButton_Click"/>
+            <Label x:Name="Ctrl_Sig" Content="" Canvas.Left="419" Height="13" Width="12" OpacityMask="Black" Background="Green" Canvas.Top="7"/>
+        </Canvas>
+        <!-- thumbnail area -->
+    </Canvas>
+
+</Window>
