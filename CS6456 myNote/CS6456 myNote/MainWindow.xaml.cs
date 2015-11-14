@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Xps.Packaging;
+using System.IO;
+using Microsoft.Office.Interop.Word;
 
 namespace CS6456_myNote
 {
@@ -386,7 +389,80 @@ namespace CS6456_myNote
 
 
 
-    ////////////////////////////////////////////  UI Operations   Chutian Wang 
-    
+        ////////////////////////////////////////////  UI Operations   Chutian Wang 
+        void Pdf_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effects = DragDropEffects.Copy;
+                var fileViewer = sender as DocumentViewer;
+                fileViewer.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(155, 155, 155));
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+        }
+        void Pdf_Dragleave(object sender, DragEventArgs e)
+        {
+            var fileViewer = sender as DocumentViewer;
+            fileViewer.Background = new SolidColorBrush(Color.FromRgb(226, 226, 226));
+        }
+        void myPdfInitial()
+        {
+
+        }
+        private List<string> fileName = new List<string>();
+
+        private void Opbtn_Click(object sender, RoutedEventArgs e)
+        {
+            // Create OpenFileDialog
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            // Set filter for file extension and default file extension
+            dlg.DefaultExt = ".doc";
+            dlg.Filter = "Word documents (.doc)|*.doc";
+
+            // Display OpenFileDialog by calling ShowDialog method
+            Nullable<bool> result = dlg.ShowDialog();
+            if (result == true)
+            {
+                if (dlg.FileName.Length > 0)
+                {
+                    string newXPSDocumentName = String.Concat(System.IO.Path.GetDirectoryName(dlg.FileName), "\\",
+                                   System.IO.Path.GetFileNameWithoutExtension(dlg.FileName), ".xps");
+                    // Set DocumentViewer.Document to XPS document
+                    fileViewer.Document =
+                        ConvertWordDocToXPSDoc(dlg.FileName, newXPSDocumentName).GetFixedDocumentSequence();
+
+                }
+            }
+
+        }
+
+        private XpsDocument ConvertWordDocToXPSDoc(string wordDocName, string xpsDocName)
+        {
+            // Create a WordApplication and add Document to it
+            Microsoft.Office.Interop.Word.Application
+            wordApplication = new Microsoft.Office.Interop.Word.Application();
+            wordApplication.Documents.Add(wordDocName);
+
+
+            Document doc = wordApplication.ActiveDocument;
+
+            try
+            {
+                doc.SaveAs(xpsDocName, WdSaveFormat.wdFormatXPS);
+                wordApplication.Quit();
+
+                XpsDocument xpsDoc = new XpsDocument(xpsDocName, System.IO.FileAccess.Read);
+                return xpsDoc;
+            }
+            catch (Exception exp)
+            {
+                string str = exp.Message;
+            }
+            return null;
+        }
     }
 }
