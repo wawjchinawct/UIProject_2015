@@ -11,10 +11,10 @@
                     <SolidColorBrush Color="White" Opacity="0"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBox x:Name="myTextBox_0" Height="56" Canvas.Left="154" TextWrapping="Wrap" Text="#1 TextBox" Canvas.Top="82" Width="96"/>
-            <TextBox x:Name="myTextBox_1" Height="96" Canvas.Left="93" TextWrapping="Wrap" Text="#1 TextBox" Canvas.Top="181" Width="106"/>
-            <TextBox x:Name="myTextBox_2" Height="66" Canvas.Left="105" TextWrapping="Wrap" Text="TextBox" Canvas.Top="351" Width="59"/>
-            <TextBox x:Name="myTextBox_3" Height="82" Canvas.Left="266" TextWrapping="Wrap" Text="TextBox" Canvas.Top="346" Width="145"/>
+            <TextBox x:Name="myTextBox_0" Height="56" Canvas.Left="154" TextWrapping="Wrap" Text="#1 TextBox" Canvas.Top="82" Width="96" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+            <TextBox x:Name="myTextBox_1" Height="96" Canvas.Left="93" TextWrapping="Wrap" Text="#1 TextBox" Canvas.Top="181" Width="106" VerticalScrollBarVisibility="Visible" AcceptsReturn="True"/>
+            <TextBox x:Name="myTextBox_2" Height="66" Canvas.Left="105" TextWrapping="Wrap" Text="TextBox" Canvas.Top="351" Width="59" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+            <TextBox x:Name="myTextBox_3" Height="82" Canvas.Left="266" TextWrapping="Wrap" Text="TextBox" Canvas.Top="346" Width="145" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
 
         </Canvas>
         <!-- Note region -->
@@ -26,7 +26,7 @@
         <!-- pdf area -->
         <Canvas x:Name="my_thumbnail" Height="83" Width="794" Background="#FF873131"/>
         <Canvas x:Name="my_Note_Menu" Height="30" Canvas.Left="353" Canvas.Top="83" Width="441" Background="#FFFFB7B7">
-            <Button Content="Button" Width="65" Height="30" Click="NewButton_Click"/>
+            <Button Content="New Note" Width="65" Height="30" Click="NewButton_Click"/>
             <Label x:Name="Ctrl_Sig" Content="" Canvas.Left="419" Height="13" Width="12" OpacityMask="Black" Background="Green" Canvas.Top="7"/>
         </Canvas>
         <!-- thumbnail area -->
