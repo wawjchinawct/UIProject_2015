@@ -19,7 +19,9 @@
         </Canvas>
         <!-- Note region -->
         <Canvas x:Name="my_pdfViewer" Height="487" Canvas.Top="83" Width="348" Background="#FFF83D3D">
-            <DocumentViewer x:Name="myDoc" Height="487" Width="348"/>
+            <Button x:Name="Opbtn" Content="Open" Width="75" RenderTransformOrigin="0.547,3.591" Click="Opbtn_Click"/>
+            <DocumentViewer x:Name="fileViewer" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="27"        
+                            Background="BlueViolet" Width="348" Height="460" AllowDrop="True"/>
         </Canvas>
         <!-- pdf area -->
         <Canvas x:Name="my_thumbnail" Height="83" Width="794" Background="#FF873131"/>
