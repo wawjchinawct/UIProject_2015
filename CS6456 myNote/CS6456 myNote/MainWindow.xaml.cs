@@ -35,8 +35,10 @@ namespace CS6456_myNote
         int isStickReady = 0;       
         System.Windows.Point pos = new System.Windows.Point();
         bool isAllowedDrag = true;
+        int isMergeReady = 0;
 
-        int index_stick_current = -1, index_stick_target = -1;
+        int indexStickCurrent = -1, indexStickTarget = -1;
+        int indexMergeCurrent = -1, indexMergeTarget = -1;
         ArrayList myUIList = new ArrayList();
         
         // my UI components and functions
@@ -113,29 +115,41 @@ namespace CS6456_myNote
                 foreach (UIElement uiEle in my_NoteArea.Children)
                 {
                     int i_2 = my_NoteArea.Children.IndexOf(uiEle);
+
                     if (uiEle.Equals(com_Indicator)) continue;
                     if (uiEle.Equals(currEle)) continue;
 
-                    if (my_isCloseStick(i_1, i_2) == 1)
+                    int i_4 = my_isClosetoStick(i_1, i_2);
+                    int i_5 = my_isClosetoMerge(i_1, i_2);
+
+                    if (i_4 == 1)
                     {
                         isStickReady = 1;
-                        index_stick_target = i_2;
-                        index_stick_current = i_1;
+                        indexStickTarget = i_2;
+                        indexStickCurrent = i_1;
 
                         return;
                     }
-                    if (my_isCloseStick(i_1, i_2) == 2)
+                    if (i_4 == 2)
                     {
                         isStickReady = 2;
-                        index_stick_target = i_2;
-                        index_stick_current = i_1;
+                        indexStickTarget = i_2;
+                        indexStickCurrent = i_1;
+                        return;
+                    }
+
+                    if (i_5 == 1)
+                    {
+                        isMergeReady = 1;
+                        indexMergeTarget = i_2;
+                        indexMergeCurrent = i_1;
                         return;
                     }
                 }
 
                 isStickReady = 0;
-                index_stick_target = -1;
-                index_stick_current = -1;
+                indexStickTarget = -1;
+                indexStickCurrent = -1;
                 com_Indicator.SetValue(Canvas.LeftProperty, 575d);
             }
 
@@ -162,7 +176,12 @@ namespace CS6456_myNote
 
             if (isStickReady != 0 && isAllowedDrag)
             {
-                my_StickOperation(index_stick_current, index_stick_target, isStickReady);
+                my_StickOperation(indexStickCurrent, indexStickTarget, isStickReady);
+            }
+
+            if (isMergeReady != 0 && isAllowedDrag)
+            {
+                my_MergeOperation();
             }
 
             com_Indicator.SetValue(Canvas.LeftProperty, 575d);
@@ -239,7 +258,34 @@ namespace CS6456_myNote
             //myDocViewer.Document = ConvertWordToXPS("my_Resources/15-Speech.pdf").GetFixedDocumentSequence();
         }
 
-        int my_isCloseStick(int i_1, int i_2)
+        int my_isClosetoMerge(int i_1, int i_2)
+        {
+            //i_2 target   i_1 current UI ele
+            double d_2L = (double)my_NoteArea.Children[i_2].GetValue(Canvas.LeftProperty);
+            double d_2T = (double)my_NoteArea.Children[i_2].GetValue(Canvas.TopProperty);
+            double d_2W = (double)my_NoteArea.Children[i_2].GetValue(Canvas.WidthProperty);
+            double d_2H = (double)my_NoteArea.Children[i_2].GetValue(Canvas.HeightProperty);
+
+            double d_1L = (double)my_NoteArea.Children[i_1].GetValue(Canvas.LeftProperty);
+            double d_1T = (double)my_NoteArea.Children[i_1].GetValue(Canvas.TopProperty);
+
+            if (((myUI)myUIList[i_1]).stick_target != -1) return 6;    
+            //Find out which part of notes are get close enough to merge
+            //only can merge with each other inside
+            if ( d_1T - d_2T > 15.0 && d_1L - d_2L > 15.0 && d_2L + d_2W - d_1L > 15.0 && d_2T + d_2H - d_1T > 15.0)
+            {
+                com_Indicator.SetValue(Canvas.LeftProperty, d_2L + 15.0);
+                com_Indicator.SetValue(Canvas.TopProperty, d_2T + 15.0);
+                com_Indicator.Width = d_2W - 30.0;
+                com_Indicator.Height = d_2H - 30.0;
+                return 1;
+            }          
+
+            return 6;
+        }
+
+
+        int my_isClosetoStick(int i_1, int i_2)
         {
             //i_2 target   i_1 current UI ele
             double d_2L = (double)my_NoteArea.Children[i_2].GetValue(Canvas.LeftProperty);// ((myUI)myUIList[i_2]).getLocation_L();
@@ -287,14 +333,10 @@ namespace CS6456_myNote
             ((myUI)myUIList[i_2]).my_isSticked = true;
             ((myUI)myUIList[i_2]).stick_children.Add(i_1);
 
-
             double d_1L = (double)my_NoteArea.Children[i_1].GetValue(Canvas.LeftProperty);
             double d_1T = (double)my_NoteArea.Children[i_1].GetValue(Canvas.TopProperty);
             ((myUI)myUIList[i_1]).my_isSticked = true;
             ((myUI)myUIList[i_1]).stick_target = i_2;
-
-
-
 
 
             //Depends on different kind of combination, do sth
@@ -321,6 +363,12 @@ namespace CS6456_myNote
                 ((myUI)myUIList[i_2]).stick_children_direction.Add(2);
                 return;
             }
+        }
+
+        void my_MergeOperation(){
+
+
+
         }
 
         int my_FindStickRoot(int i_1)
@@ -375,8 +423,15 @@ namespace CS6456_myNote
 
             newUIE.SetValue(Canvas.LeftProperty, 40d);
             newUIE.SetValue(Canvas.TopProperty, 40d);
-            newUIE.SetValue(Canvas.WidthProperty, 60d);
-            newUIE.SetValue(Canvas.HeightProperty, 60d);
+            newUIE.SetValue(Canvas.WidthProperty, 100d);
+            newUIE.SetValue(Canvas.HeightProperty, 75d);
+            ((TextBox)newUIE).AcceptsReturn = true;
+            ((TextBox)newUIE).VerticalScrollBarVisibility = System.Windows.Controls.ScrollBarVisibility.Visible;
+            ((TextBox)newUIE).Text = "Hello~\nWorld!";
+            //((TextBox)newUIE).FontFamily = System.Windows.Media.Fonts[10];
+            //newUIE.SetValue(Canvas.BackgroundProperty,Color.FromRgb(125,190,255));
+            ((TextBox)newUIE).Background = Brushes.SteelBlue;
+
 
             newUIE.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler(Element_MouseLeftButtonDown), true);
             newUIE.AddHandler(Button.MouseMoveEvent, new MouseEventHandler(Element_MouseMove), true);
