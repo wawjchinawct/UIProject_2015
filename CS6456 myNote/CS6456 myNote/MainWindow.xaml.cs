@@ -150,6 +150,11 @@ namespace CS6456_myNote
                 isStickReady = 0;
                 indexStickTarget = -1;
                 indexStickCurrent = -1;
+
+                isMergeReady = 0;
+                indexMergeTarget = -1;
+                indexMergeCurrent = -1;
+
                 com_Indicator.SetValue(Canvas.LeftProperty, 575d);
             }
 
@@ -338,6 +343,9 @@ namespace CS6456_myNote
             ((myUI)myUIList[i_1]).my_isSticked = true;
             ((myUI)myUIList[i_1]).stick_target = i_2;
 
+            isStickReady = 0;
+            indexStickTarget = -1;
+            indexStickCurrent = -1;
 
             //Depends on different kind of combination, do sth
             if (i_3 == 1)
@@ -367,8 +375,13 @@ namespace CS6456_myNote
 
         void my_MergeOperation(){
 
+            String myAllChildrenText = my_MergeAllChildrenText(indexMergeCurrent);
 
+            ((TextBox)my_NoteArea.Children[indexMergeTarget]).Text += myAllChildrenText;
 
+            isMergeReady = 0;
+            indexMergeTarget = -1;
+            indexMergeCurrent = -1;
         }
 
         int my_FindStickRoot(int i_1)
@@ -395,6 +408,25 @@ namespace CS6456_myNote
                 // need to get rid of children when it's not sticked any more, OR it will move twice
                 my_MoveAllStickUICom(i_2, myLeft, myTop);
             }
+        }
+
+        String my_MergeAllChildrenText(int i_1)
+        {
+            String myResult ="";
+            UIElement curEle = my_NoteArea.Children[i_1];
+
+            //s_1 += "\n  " + ((TextBox)curEle).Text;
+            myResult += "\n  " + ((TextBox)curEle).Text;
+
+            foreach (int i_2 in ((myUI)myUIList[i_1]).stick_children)
+            {
+                myResult += my_MergeAllChildrenText(i_2);
+            }
+            my_NoteArea.Children.RemoveAt(i_1);
+            myUIList.RemoveAt(i_1);
+            // need to change all index relationship : stick merge 
+
+            return myResult;
         }
 
         // use rightControl to decide to edit or drag( will cause non-editable)
@@ -430,7 +462,7 @@ namespace CS6456_myNote
             ((TextBox)newUIE).Text = "Hello~\nWorld!";
             //((TextBox)newUIE).FontFamily = System.Windows.Media.Fonts[10];
             //newUIE.SetValue(Canvas.BackgroundProperty,Color.FromRgb(125,190,255));
-            ((TextBox)newUIE).Background = Brushes.SteelBlue;
+            ((TextBox)newUIE).Background = Brushes.Wheat;//.SteelBlue;
 
 
             newUIE.AddHandler(Button.MouseLeftButtonDownEvent, new MouseButtonEventHandler(Element_MouseLeftButtonDown), true);

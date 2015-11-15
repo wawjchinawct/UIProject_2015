@@ -11,14 +11,14 @@
                     <SolidColorBrush Color="White" Opacity="0"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBox x:Name="myTextBox_0" Height="56" Canvas.Left="154" TextWrapping="Wrap" Text="#1 TextBox" Canvas.Top="82" Width="96" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Background="#FF7DBEFF"/>
+            <TextBox x:Name="myTextBox_0" Height="56" Canvas.Left="154" TextWrapping="Wrap" Text="#1 TextBox" Canvas.Top="82" Width="96" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Background="#FFF5DEB3"/>
             <TextBox x:Name="myTextBox_1" Height="96" Canvas.Left="93" TextWrapping="Wrap" Text="#1 TextBox" Canvas.Top="181" Width="106" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" FontFamily="Georgia">
                 <TextBox.Background>
-                    <SolidColorBrush Color="#FF7DBEFF"/>
+                    <SolidColorBrush Color="#FFF5DEB3"/>
                 </TextBox.Background>
             </TextBox>
-            <TextBox x:Name="myTextBox_2" Height="66" Canvas.Left="105" TextWrapping="Wrap" Text="TextBox" Canvas.Top="351" Width="59" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Background="#FF7DBEFF"/>
-            <TextBox x:Name="myTextBox_3" Height="82" Canvas.Left="266" TextWrapping="Wrap" Text="TextBox" Canvas.Top="346" Width="145" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Background="#FF7DBEFF"/>
+            <TextBox x:Name="myTextBox_2" Height="66" Canvas.Left="105" TextWrapping="Wrap" Text="TextBox" Canvas.Top="351" Width="59" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Background="#FFF5DEB3"/>
+            <TextBox x:Name="myTextBox_3" Height="82" Canvas.Left="266" TextWrapping="Wrap" Text="TextBox" Canvas.Top="346" Width="145" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Background="#FFF5DEB3"/>
 
         </Canvas>
         <!-- Note region -->
